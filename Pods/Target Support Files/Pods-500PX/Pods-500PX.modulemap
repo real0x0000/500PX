@@ -1,0 +1,6 @@
+framework module Pods_500PX {
+  umbrella header "Pods-500PX-umbrella.h"
+
+  export *
+  module * { export * }
+}

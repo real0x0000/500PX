@@ -1,0 +1,43 @@
+PODS:
+  - Alamofire (4.4.0)
+  - AlamofireImage (3.2.0):
+    - Alamofire (~> 4.1)
+  - ImageSlideshow (1.3.0):
+    - ImageSlideshow/Core (= 1.3.0)
+  - ImageSlideshow/Alamofire (1.3.0):
+    - AlamofireImage (~> 3.0)
+    - ImageSlideshow/Core
+  - ImageSlideshow/Core (1.3.0)
+  - RxBlocking (3.0.1):
+    - RxSwift (~> 3.0)
+  - RxCocoa (3.0.1):
+    - RxSwift (~> 3.0)
+  - RxSwift (3.0.1)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
+  - SwiftyJSON (3.1.4)
+
+DEPENDENCIES:
+  - Alamofire (= 4.4.0)
+  - ImageSlideshow (= 1.3.0)
+  - ImageSlideshow/Alamofire
+  - RxBlocking (= 3.0.1)
+  - RxCocoa (= 3.0.1)
+  - RxSwift (= 3.0.1)
+  - SDWebImage (= 3.8.2)
+  - SwiftyJSON (= 3.1.4)
+
+SPEC CHECKSUMS:
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
+  ImageSlideshow: 96e2bb4e6f16f8b682ad5bb41691f463bed58a07
+  RxBlocking: 5de082d09d1ab45b49173f309f1a97d6b50f34c4
+  RxCocoa: 15a52fc590dcc700cb4a690a633b5c5184ce3a78
+  RxSwift: af5680055c4ad04480189c52d28385b1029493a6
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+
+PODFILE CHECKSUM: 7c713532e7bf661107a9f4d5e5d151f438ba583d
+
+COCOAPODS: 1.1.1
