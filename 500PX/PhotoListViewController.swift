@@ -15,6 +15,7 @@ class PhotoListViewController: UIViewController {
     
     var photos: [Photo] = []
     var disposeBag = DisposeBag()
+    var refreshControl: UIRefreshControl!
     
     let vm = PhotoListViewModel()
     let itemPerRow: CGFloat = 2
@@ -25,14 +26,29 @@ class PhotoListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initCollectionView()
+        vm.currentPage = 1
         vm.loadPhotos()
+        
+        self.title = vm.categoryName
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(reloadPhotos), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
         
         vm.rx_photos
             .subscribe(onNext: { [unowned self] in
-                self.photos = $0
+                self.photos.append(contentsOf: $0)
                 self.collectionView.reloadData()
+                self.refreshControl.endRefreshing()
             }).addDisposableTo(disposeBag)
 
+    }
+    
+    func reloadPhotos() {
+        photos = []
+        vm.currentPage = 1
+        vm.totalPage = 0
+        vm.loadPhotos()
     }
     
 }
@@ -57,20 +73,21 @@ extension PhotoListViewController: UICollectionViewDataSource, UICollectionViewD
         let photo = photos[indexPath.row]
         cell.titleLabel.text = photo.imageName
         cell.authorLabel.text = photo.authorName
-        cell.imageView.sd_setImage(with: URL(string: "\(photo.imageUrl)"))
+        cell.imageView.sd_setImage(with: URL(string: photo.imageUrl))
         return cell
     }
     
-//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        if indexPath.row == productsData.count - 1 {
-//            if let next = nextUrl {
-//                vm.fetchNextProducts(nextUrl: next)
-//                loadingView.isHidden = false
-//                indicatorView.startAnimating()
-//            }
-//        }
-//    }
-    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == photos.count - 1 {
+            if (vm.currentPage + 1) <= vm.totalPage {
+                vm.currentPage += 1
+                print(vm.currentPage)
+                print(vm.totalPage)
+                vm.loadPhotos()
+            }
+        }
+    }
+
 }
 
 extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
@@ -89,6 +106,19 @@ extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
+    }
+    
+}
+
+extension PhotoListViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "displayFullPhoto") {
+            let indexPath = collectionView.indexPathsForSelectedItems!
+            let view = segue.destination as! PhotoFSViewController
+            view.vm.photos = photos
+            view.photoIndex = indexPath.last!.row
+        }
     }
     
 }

@@ -88,7 +88,7 @@
             </objects>
             <point key="canvasLocation" x="752.79999999999995" y="-81.409295352323838"/>
         </scene>
-        <!--title-->
+        <!--Photo List View Controller-->
         <scene sceneID="DFw-ai-4Tr">
             <objects>
                 <viewController id="re1-0P-zSL" customClass="PhotoListViewController" customModule="_00PX" sceneMemberID="viewController">
@@ -120,17 +120,17 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBf-on-INP" userLabel="Content View">
                                                     <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mPn-Wd-W1h">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mPn-Wd-W1h">
                                                             <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jj2-ln-tXd">
-                                                            <rect key="frame" x="4" y="161.5" width="172" height="14.5"/>
+                                                            <rect key="frame" x="4" y="161" width="172" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="co5-Jt-UHh">
-                                                            <rect key="frame" x="4" y="140.5" width="172" height="17"/>
+                                                            <rect key="frame" x="4" y="140" width="172" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -162,6 +162,7 @@
                                             <outlet property="authorLabel" destination="jj2-ln-tXd" id="5ak-Fw-h3n"/>
                                             <outlet property="imageView" destination="mPn-Wd-W1h" id="UeH-73-haH"/>
                                             <outlet property="titleLabel" destination="co5-Jt-UHh" id="wIA-me-K22"/>
+                                            <segue destination="Bvy-45-caX" kind="presentation" identifier="displayFullPhoto" id="G8Y-5R-BaY"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -175,20 +176,19 @@
                             <constraint firstAttribute="trailing" secondItem="itE-9Z-dcl" secondAttribute="trailing" id="sab-a2-xys"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="title" id="xXL-4d-d6d"/>
+                    <navigationItem key="navigationItem" id="xXL-4d-d6d"/>
                     <connections>
                         <outlet property="collectionView" destination="itE-9Z-dcl" id="FTY-gB-RQD"/>
-                        <segue destination="Bvy-45-caX" kind="presentation" id="teu-rz-fKM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bhw-Ph-L6x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1477.5999999999999" y="-81.409295352323838"/>
         </scene>
-        <!--View Controller-->
+        <!--PhotoFS View Controller-->
         <scene sceneID="nRS-1i-SYm">
             <objects>
-                <viewController id="Bvy-45-caX" sceneMemberID="viewController">
+                <viewController id="Bvy-45-caX" customClass="PhotoFSViewController" customModule="_00PX" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oaa-0g-iwh"/>
                         <viewControllerLayoutGuide type="bottom" id="w1D-Os-Xrl"/>
@@ -196,12 +196,104 @@
                     <view key="view" contentMode="scaleToFill" id="bWK-J5-bb1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q7U-ip-Jw4" userLabel="Content View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8PL-K0-AQW">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <gestureRecognizers/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNL-ms-Pqn">
+                                        <rect key="frame" x="16" y="641" width="343" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xsK-FO-fLW">
+                                        <rect key="frame" x="16" y="612" width="343" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9e-h3-yZX">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="0RC-e6-dsg"/>
+                                            <constraint firstAttribute="height" constant="50" id="drp-Xd-sYf"/>
+                                        </constraints>
+                                        <state key="normal" image="close">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closeWithSender:" destination="Bvy-45-caX" eventType="touchUpInside" id="b3g-eB-0mc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="e9e-h3-yZX" firstAttribute="top" secondItem="Q7U-ip-Jw4" secondAttribute="top" id="1FM-JW-lig"/>
+                                    <constraint firstItem="xsK-FO-fLW" firstAttribute="leading" secondItem="Q7U-ip-Jw4" secondAttribute="leading" constant="16" id="4Lw-Vq-p8z"/>
+                                    <constraint firstAttribute="trailing" secondItem="hNL-ms-Pqn" secondAttribute="trailing" constant="16" id="60S-87-kfY"/>
+                                    <constraint firstItem="hNL-ms-Pqn" firstAttribute="leading" secondItem="Q7U-ip-Jw4" secondAttribute="leading" constant="16" id="HJv-XF-Sc1"/>
+                                    <constraint firstAttribute="bottom" secondItem="hNL-ms-Pqn" secondAttribute="bottom" constant="8" id="Hyu-kH-Ssa"/>
+                                    <constraint firstAttribute="trailing" secondItem="8PL-K0-AQW" secondAttribute="trailing" id="JCq-wn-RFF"/>
+                                    <constraint firstItem="e9e-h3-yZX" firstAttribute="leading" secondItem="Q7U-ip-Jw4" secondAttribute="leading" id="K86-y9-LFU"/>
+                                    <constraint firstAttribute="trailing" secondItem="xsK-FO-fLW" secondAttribute="trailing" constant="16" id="SU6-lr-FST"/>
+                                    <constraint firstItem="hNL-ms-Pqn" firstAttribute="top" secondItem="xsK-FO-fLW" secondAttribute="bottom" constant="8" id="YVL-Lo-eip"/>
+                                    <constraint firstItem="8PL-K0-AQW" firstAttribute="leading" secondItem="Q7U-ip-Jw4" secondAttribute="leading" id="kuU-73-JLo"/>
+                                    <constraint firstAttribute="bottom" secondItem="8PL-K0-AQW" secondAttribute="bottom" id="pGG-Om-5MT"/>
+                                    <constraint firstItem="8PL-K0-AQW" firstAttribute="top" secondItem="Q7U-ip-Jw4" secondAttribute="top" id="zmc-Bn-m98"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Q7U-ip-Jw4" secondAttribute="trailing" id="X1P-kq-GKn"/>
+                            <constraint firstItem="Q7U-ip-Jw4" firstAttribute="top" secondItem="bWK-J5-bb1" secondAttribute="top" id="cE2-rZ-l9X"/>
+                            <constraint firstAttribute="bottom" secondItem="Q7U-ip-Jw4" secondAttribute="bottom" id="hPb-3q-0QT"/>
+                            <constraint firstItem="Q7U-ip-Jw4" firstAttribute="leading" secondItem="bWK-J5-bb1" secondAttribute="leading" id="wgj-he-m7z"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Uye-Um-Oo1" appends="YES" id="R7y-gq-LRx"/>
+                            <outletCollection property="gestureRecognizers" destination="PHn-c8-n74" appends="YES" id="lZm-IR-NwT"/>
+                            <outletCollection property="gestureRecognizers" destination="tIR-Ka-YHT" appends="YES" id="cD3-FA-zd1"/>
+                            <outletCollection property="gestureRecognizers" destination="V93-61-hHV" appends="YES" id="Yx2-jn-aKc"/>
+                        </connections>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="authorLabel" destination="hNL-ms-Pqn" id="c9k-FD-s7S"/>
+                        <outlet property="imageView" destination="8PL-K0-AQW" id="JMw-gN-JaJ"/>
+                        <outlet property="titleLabel" destination="xsK-FO-fLW" id="Qyd-rW-229"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cv4-3H-C5Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="up" id="tIR-Ka-YHT" userLabel="Up Swipe Gesture Recognizer">
+                    <connections>
+                        <action selector="upSwipeGestureWithSender:" destination="Bvy-45-caX" id="Oj2-cF-qUb"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="Uye-Um-Oo1" userLabel="Left Swipe Gesture Recognizer">
+                    <connections>
+                        <action selector="leftSwipeGestureWithSender:" destination="Bvy-45-caX" id="6lN-hS-ytZ"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="PHn-c8-n74" userLabel="Right Swipe Gesture Recognizer">
+                    <connections>
+                        <action selector="rightSwipeGestureWithSender:" destination="Bvy-45-caX" id="grb-Q9-XeL"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="V93-61-hHV" userLabel="Down Swipe Gesture Recognizer">
+                    <connections>
+                        <action selector="downSwipeGestureWithSender:" destination="Bvy-45-caX" id="vAC-Db-hDn"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2194" y="-81"/>
+            <point key="canvasLocation" x="2192.8000000000002" y="-81.409295352323838"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="close" width="24" height="24"/>
+    </resources>
 </document>

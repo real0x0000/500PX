@@ -17,7 +17,8 @@ class PhotoListViewModel {
     let rx_categoryId: BehaviorSubject<Int> = BehaviorSubject(value: 0)
     let rx_categoryName: BehaviorSubject<String> = BehaviorSubject(value: "")
     let rx_photos: BehaviorSubject<[Photo]> = BehaviorSubject(value: [])
-    let rx_page: BehaviorSubject<Int> = BehaviorSubject(value: 1)
+    let rx_currentPage: BehaviorSubject<Int> = BehaviorSubject(value: 0)
+    let rx_totalPage: BehaviorSubject<Int> = BehaviorSubject(value: 0)
     
     func loadPhotos() {
         let headers = [
@@ -25,13 +26,15 @@ class PhotoListViewModel {
         ]
         var parameters: [String: Any] = [:]
         parameters["only"] = categoryName
-        parameters["page"] =
+        parameters["image_size"] = 5
+        parameters["page"] = currentPage
 
-//        print(parameters)
         Alamofire.request("https://api.500px.com/v1/photos?feature=fresh_today&consumer_key=\(consumerKey)", parameters: parameters, headers: headers)
             .responseData { resp in
             let json = JSON(resp.result.value!)
             let photos = json["photos"].map { (_, js) in Photo.parseJSON(json: js) }
+            let totalPages = json["total_pages"].intValue
+            self.rx_totalPage.onNext(totalPages)
             self.rx_photos.onNext(photos)
         }
     }
@@ -50,9 +53,14 @@ extension PhotoListViewModel {
         set(name) { rx_categoryName.onNext(name) }
     }
     
-    var page: Int {
-        get { return try! rx_page.value() }
-        set(page) { rx_page.onNext(page) }
+    var currentPage: Int {
+        get { return try! rx_currentPage.value() }
+        set(page) { rx_currentPage.onNext(page) }
+    }
+    
+    var totalPage: Int {
+        get { return try! rx_totalPage.value() }
+        set(page) { rx_totalPage.onNext(page) }
     }
     
 }
