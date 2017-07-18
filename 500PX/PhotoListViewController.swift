@@ -70,10 +70,12 @@ extension PhotoListViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
-        let photo = photos[indexPath.row]
-        cell.titleLabel.text = photo.imageName
-        cell.authorLabel.text = photo.authorName
-        cell.imageView.sd_setImage(with: URL(string: photo.imageUrl))
+        if photos.count > 0 {
+            let photo = photos[indexPath.row]
+            cell.titleLabel.text = photo.imageName
+            cell.authorLabel.text = photo.authorName
+            cell.imageView.sd_setImage(with: URL(string: photo.imageUrl))
+        }
         return cell
     }
     
@@ -81,8 +83,6 @@ extension PhotoListViewController: UICollectionViewDataSource, UICollectionViewD
         if indexPath.row == photos.count - 1 {
             if (vm.currentPage + 1) <= vm.totalPage {
                 vm.currentPage += 1
-                print(vm.currentPage)
-                print(vm.totalPage)
                 vm.loadPhotos()
             }
         }

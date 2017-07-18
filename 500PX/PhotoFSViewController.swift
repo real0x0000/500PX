@@ -50,20 +50,19 @@ class PhotoFSViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         vm.rx_photos
             .subscribe(onNext: { [unowned self] photos in
                 self.photos = photos
                 self.displayPhoto()
             }).addDisposableTo(disposeBag)
-        
     }
     
     func displayPhoto() {
         let photo = photos[photoIndex]
         titleLabel.text = photo.imageName
         authorLabel.text = photo.authorName
-        imageView.sd_setImage(with: URL(string: "\(photo.imageUrl)"))
+        print(photo.imageUrl)
+        imageView.sd_setImage(with: URL(string: photo.imageUrl))
     }
     
 }
